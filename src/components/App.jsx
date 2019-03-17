@@ -15,13 +15,15 @@ function App() {
 
   const [topics, setTopics] = useState([]);
 
-  // useEffect(() => {
-  //   getTopics();
-  // });
+  useEffect(() => {
+    getTopics();
+  }, []);
 
   const getTopics = function() {
     fetch('/topics')
-      .then((topics) => setTopics(topics))
+      .then((res) => res.json())
+      .then((topicList) => setTopics(topicList))
+      .catch((err) => console.log(err));
   }
 
   let addTopic = function(event, title, text) {
@@ -43,6 +45,8 @@ function App() {
   return (
     <Container fluid>
       <Header as='h1'>WikiHowse</Header>
+      <p>Hello!</p>
+      <p>{topics[0] ? topics[0].title : 'nothing here'}</p>
       <BottomBar addTopic={addTopic} />
     </Container>
   );
