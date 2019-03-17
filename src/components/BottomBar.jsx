@@ -26,7 +26,7 @@ function BottomBar({addTopic}) {
 
   return (
     <Menu
-      className="inverted bottom fixed"
+      className="bottom fixed"
     >
       <Menu.Item
         name="search"
