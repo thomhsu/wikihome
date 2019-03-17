@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { 
   Container,
   Button,
@@ -14,6 +14,33 @@ import BottomBar from './BottomBar.jsx';
 function App() {
 
   const [topics, setTopics] = useState([]);
+  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
+  const [keywords, setKeywords] = useState([]);
+
+  addTopic = addTopics.bind(this);
+
+  useEffect(() => {
+    getTopics();
+  });
+
+  const getTopics = function() {
+    fetch('/topics')
+      .then((topics) => setTopics(topics))
+  }
+
+  const addTopic = function(e) {
+    e.preventDefault();
+    let data = {title, text, keywords};
+
+    fetch ('/topics', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: data
+    })
+  }
 
   return (
     <Container fluid>

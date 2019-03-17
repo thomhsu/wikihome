@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const topicSchema = new mongoose.Schema({
   title: String,
   text: String,
-  keywords: [String],
-  children: [topicSchema]
+  keywords: [String]
 })
 
 const Topic = mongoose.model('Topic', topicSchema);
