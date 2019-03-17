@@ -4,6 +4,7 @@
   "description": "Create an operating manual for your home",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongoose": "^5.4.19",
     "semantic-ui-css": "^2.4.1",
@@ -26,6 +27,7 @@
     "webpack-cli": "^3.3.0"
   },
   "scripts": {
+    "start": "node index.js",
     "devstart": "nodemon index.js",
     "test": "test",
     "build": "webpack --mode production",
