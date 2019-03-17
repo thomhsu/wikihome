@@ -11,6 +11,7 @@ app.use(express.static('dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.post('/topics', query.getTopics);
 app.post('/topics', query.createNewTopic);
  
-app.listen(port, () => console.log(`Listening on ${port}...`))
+app.listen(port, () => console.log(`Listening on ${port}...`));
