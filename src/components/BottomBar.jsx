@@ -16,8 +16,12 @@ function BottomBar() {
   const [text, setText] = useState('');
   const [keywords, setKeywords] = useState([]);
 
-  const handleChange = (e, handler) => {
-    handler(e.target.value)
+  const handleChange = (e) => {
+    const handler = {
+      title: setTitle,
+      text: setText
+    };
+    handler[e.target.name](e.target.value);
   }
 
   return (
@@ -31,7 +35,7 @@ function BottomBar() {
       </Menu.Item>
       <Menu.Item
         name='newTopic'
-        onClick={() => newTopicOpened(true)}  
+        onClick={() => newTopicModalOpened(true)}  
       >
         Add New Topic  
       </Menu.Item>
@@ -40,10 +44,10 @@ function BottomBar() {
         <Modal.Header>Add a New Topic</Modal.Header>
         <Modal.Content>
           <Form>
-            <Form.Input fluid label='Title' placeholder='My topic' onChange={() => handleChange(e, setTitle)}/>
+            <Form.Input name='title' label='Title' placeholder='My topic' onChange={handleChange}/>
           </Form>
           <Form>
-            <Form.TextArea fluid label='Text' placeholder='Blah blah blah...' onChange={() => handleChange(e, setText)}/>
+            <Form.TextArea name='text' label='Text' placeholder='Blah blah blah...' onChange={handleChange}/>
           </Form>
         </Modal.Content>
         <Modal.Actions>

@@ -16,11 +16,11 @@ function App() {
   const [topics, setTopics] = useState([]);
 
 
-  addTopic = addTopics.bind(this);
+  // addTopic = addTopics.bind(this);
 
-  useEffect(() => {
-    getTopics();
-  });
+  // useEffect(() => {
+  //   getTopics();
+  // });
 
   const getTopics = function() {
     fetch('/topics')
