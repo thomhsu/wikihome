@@ -14,9 +14,7 @@ import BottomBar from './BottomBar.jsx';
 function App() {
 
   const [topics, setTopics] = useState([]);
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
-  const [keywords, setKeywords] = useState([]);
+
 
   addTopic = addTopics.bind(this);
 

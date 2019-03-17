@@ -11,7 +11,14 @@ import {
 function BottomBar() {
 
   const [topics, setTopics] = useState([]);
-  const [open, newTopicOpened] = useState(false);
+  const [open, newTopicModalOpened] = useState(false);
+  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
+  const [keywords, setKeywords] = useState([]);
+
+  const handleChange = (e, handler) => {
+    handler(e.target.value)
+  }
 
   return (
     <Menu
@@ -29,18 +36,18 @@ function BottomBar() {
         Add New Topic  
       </Menu.Item>
 
-      <Modal size='fullscreen' open={open} onClose={() => newTopicOpened(false)}>
+      <Modal size='fullscreen' open={open} onClose={() => newTopicModalOpened(false)}>
         <Modal.Header>Add a New Topic</Modal.Header>
         <Modal.Content>
           <Form>
-            <Form.Input fluid label='Title' placeholder='My topic'/>
+            <Form.Input fluid label='Title' placeholder='My topic' onChange={() => handleChange(e, setTitle)}/>
           </Form>
           <Form>
-            <Form.TextArea fluid label='Text' placeholder='Blah blah blah...'/>
+            <Form.TextArea fluid label='Text' placeholder='Blah blah blah...' onChange={() => handleChange(e, setText)}/>
           </Form>
         </Modal.Content>
         <Modal.Actions>
-          <Button negative onClick={() => newTopicOpened(false)} >Cancel</Button>
+          <Button negative onClick={() => newTopicModalOpened(false)} >Cancel</Button>
           <Button positive icon='checkmark' labelPosition='right' content='Yes' />
         </Modal.Actions>
       </Modal>
