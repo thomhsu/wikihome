@@ -8,7 +8,7 @@ import {
  } from 'semantic-ui-react';
 
 
-function BottomBar() {
+function BottomBar({addTopic}) {
 
   const [topics, setTopics] = useState([]);
   const [open, newTopicModalOpened] = useState(false);
@@ -26,33 +26,31 @@ function BottomBar() {
 
   return (
     <Menu
-      className='inverted bottom fixed'
+      className="inverted bottom fixed"
     >
       <Menu.Item
-        name='search'
+        name="search"
       >
         <Search />
       </Menu.Item>
       <Menu.Item
-        name='newTopic'
+        name="newTopic"
         onClick={() => newTopicModalOpened(true)}  
       >
         Add New Topic  
       </Menu.Item>
 
-      <Modal size='fullscreen' open={open} onClose={() => newTopicModalOpened(false)}>
+      <Modal size="fullscreen" open={open} onClose={() => newTopicModalOpened(false)}>
         <Modal.Header>Add a New Topic</Modal.Header>
         <Modal.Content>
-          <Form>
-            <Form.Input name='title' label='Title' placeholder='My topic' onChange={handleChange}/>
-          </Form>
-          <Form>
-            <Form.TextArea name='text' label='Text' placeholder='Blah blah blah...' onChange={handleChange}/>
+          <Form id="newTopicForm">
+            <Form.Input name="title" label="Title" placeholder="My topic" onChange={handleChange}/>
+            <Form.TextArea name="text" label="Text" placeholder="Blah blah blah..." onChange={handleChange}/>
           </Form>
         </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => newTopicModalOpened(false)} >Cancel</Button>
-          <Button positive icon='checkmark' labelPosition='right' content='Yes' />
+          <Button positive form="newTopicForm" onClick={() => addTopic(event, title, text)} icon="checkmark" labelPosition="right" content="Yes"/>
         </Modal.Actions>
       </Modal>
     </Menu>

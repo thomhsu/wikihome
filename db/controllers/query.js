@@ -2,11 +2,12 @@ const Topic = require('../models/topic.js');
 
 module.exports.getTopics = async (req, res) => {
   const data = await Topic.find({});
-  data.then(data => res.send(data));
+  res.send(data);
 }
 
 module.exports.createNewTopic = (req, res) => {
   const topic = req.body;
+  console.log(req.body)
   const newTopic = new Topic ({
     title: topic.title,
     text: topic.text,

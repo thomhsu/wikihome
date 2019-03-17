@@ -15,9 +15,6 @@ function App() {
 
   const [topics, setTopics] = useState([]);
 
-
-  // addTopic = addTopics.bind(this);
-
   // useEffect(() => {
   //   getTopics();
   // });
@@ -27,23 +24,26 @@ function App() {
       .then((topics) => setTopics(topics))
   }
 
-  const addTopic = function(e) {
-    e.preventDefault();
-    let data = {title, text, keywords};
+  let addTopic = function(event, title, text) {
+    event.preventDefault();
+    let data = {title, text};
 
     fetch ('/topics', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: data
+      body: JSON.stringify(data)
     })
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   }
+  addTopic = addTopic.bind(this);
 
   return (
     <Container fluid>
       <Header as='h1'>WikiHowse</Header>
-      <BottomBar />
+      <BottomBar addTopic={addTopic} />
     </Container>
   );
 }
