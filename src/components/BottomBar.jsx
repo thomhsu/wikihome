@@ -2,13 +2,8 @@ import React, {useState} from 'react';
 import { 
   Menu,
   Modal,
-  Container,
   Button,
   Form,
-  Grid,
-  Header,
-  Message,
-  Segment,
   Search,
  } from 'semantic-ui-react';
 
@@ -35,12 +30,17 @@ function BottomBar() {
       </Menu.Item>
 
       <Modal size='fullscreen' open={open} onClose={() => newTopicOpened(false)}>
-        <Modal.Header>Delete Your Account</Modal.Header>
+        <Modal.Header>Add a New Topic</Modal.Header>
         <Modal.Content>
-          <p>Are you sure you want to delete your account</p>
+          <Form>
+            <Form.Input fluid label='Title' placeholder='My topic'/>
+          </Form>
+          <Form>
+            <Form.TextArea fluid label='Text' placeholder='Blah blah blah...'/>
+          </Form>
         </Modal.Content>
         <Modal.Actions>
-          <Button negative>No</Button>
+          <Button negative onClick={() => newTopicOpened(false)} >Cancel</Button>
           <Button positive icon='checkmark' labelPosition='right' content='Yes' />
         </Modal.Actions>
       </Modal>
