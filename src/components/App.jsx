@@ -47,8 +47,8 @@ function App() {
 
   return (
     <Container fluid>
-      <Header as='h1' icon textAlign='center'>
-        <Icon name='home' circular />
+      <Header as="h1" icon textAlign="center" className="header">
+        <Icon name="home" />
         <Header.Content>WikiHome</Header.Content>
       </Header>
       {topics.map(topic => <Topic title={topic.title} text={topic.text} />)}
