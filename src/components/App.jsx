@@ -5,14 +5,14 @@ import {
   Header
  } from 'semantic-ui-react';
 
-import Topic from './Topic.jsx';
-import BottomBar from './BottomBar.jsx';
+import TopicItem from './TopicItem.jsx';
 import TopicView from './TopicView.jsx';
+import BottomBar from './BottomBar.jsx';
 
 function App() {
 
   const [topics, setTopics] = useState([]);
-  const [currentView, setView] = useState('wiki');
+  const [currentView, setView] = useState('home');
 
   const quotes = [
     'A man travels the world over in search of what he needs and returns home to find it. <em>George A. Moore</em>',
@@ -48,10 +48,10 @@ function App() {
   }
 
   const renderCurrent = function() {
-    if (currentView === 'wiki') {
+    if (currentView === 'home') {
       return (
         <div>
-          {topics.map(topic => <Topic title={topic.title} text={topic.text} id={topic._id} setView={setView.bind(this)} key={topic._id}/>)}
+          {topics.map(topic => <TopicItem title={topic.title} text={topic.text} id={topic._id} setView={setView.bind(this)} key={topic._id}/>)}
         </div>
       )
     } else {
@@ -71,7 +71,7 @@ function App() {
   return (
     <Container fluid>
       <Header as="h1" icon textAlign="center" className="header">
-        <Icon name="home" />
+        <Icon name="home" onClick={() => setView('home')} />
         <Header.Content>WikiHome</Header.Content>
       </Header>
       {renderCurrent()}
