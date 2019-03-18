@@ -66,9 +66,17 @@ function App() {
         if (topic._id === currentView) {
           selectedTopic = topic;
         }
-      })
+      });
+      let relatedTopics = [];
+      topics.forEach(topic => {
+        topic.parents.forEach(parent => {
+          if (parent[0] === selectedTopic._id) {
+            relatedTopics.push(topic);
+          }
+        })
+      });
       return (
-        <TopicView topic={selectedTopic} />
+        <TopicView topic={selectedTopic} relatedTopics={relatedTopics} />
       )
     }
   }
