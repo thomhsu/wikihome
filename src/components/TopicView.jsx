@@ -3,7 +3,7 @@ import {
   Segment, Header
  } from 'semantic-ui-react';
 
-function Topic({title, text, id, setView}) {
+function TopicView({title, text, id, setView}) {
   return (
     <Segment compact inverted className="topic" onClick={() => setView(id)}>
       <Header as="h2" className="topic-header">{title.toUpperCase() + ', ' + id}</Header>
@@ -11,4 +11,4 @@ function Topic({title, text, id, setView}) {
   )
 }
 
-export default Topic;
+export default TopicView;

@@ -7,6 +7,7 @@ import {
 
 import Topic from './Topic.jsx';
 import BottomBar from './BottomBar.jsx';
+import TopicView from './TopicView.jsx';
 
 function App() {
 
@@ -23,14 +24,14 @@ function App() {
     getTopics();
   }, []);
 
-  const getTopics = function() {
+  const getTopics = () => {
     fetch('/topics')
       .then((res) => res.json())
       .then((topicList) => setTopics(topicList))
       .catch((err) => console.log(err));
   }
 
-  const addTopic = function(event, title, text) {
+  const addTopic = (event, title, text) => {
     event.preventDefault();
     let data = {title, text};
 
@@ -50,10 +51,21 @@ function App() {
     if (currentView === 'wiki') {
       return (
         <div>
-          {topics.map(topic => <Topic title={topic.title} text={topic.text} id={topic._id} key={topic._id}/>)}
+          {topics.map(topic => <Topic title={topic.title} text={topic.text} id={topic._id} setView={setView.bind(this)} key={topic._id}/>)}
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          Under Construction
         </div>
       )
     }
+    // } else {
+    //   return (
+    //     <TopicView />
+    //   )
+    // }
   }
 
   return (
