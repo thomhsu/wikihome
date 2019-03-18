@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/wikihowse');
+mongoose.connect('mongodb://localhost/wikihome');
 
 const db = mongoose.connection;
 
