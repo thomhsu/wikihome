@@ -49,9 +49,15 @@ function App() {
 
   const renderCurrent = function() {
     if (currentView === 'home') {
+      let parentTopics = [];
+      topics.forEach(topic => {
+        if (!topic.parents.length) {
+          parentTopics.push(topic);
+        }
+      })
       return (
         <div>
-          {topics.map(topic => <TopicItem title={topic.title} text={topic.text} id={topic._id} setView={setView.bind(this)} key={topic._id}/>)}
+          {parentTopics.map(topic => <TopicItem title={topic.title} text={topic.text} id={topic._id} setView={setView.bind(this)} key={topic._id}/>)}
         </div>
       )
     } else {
