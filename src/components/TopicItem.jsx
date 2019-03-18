@@ -5,8 +5,8 @@ import {
 
 function TopicItem({title, text, id, setView}) {
   return (
-    <Segment compact inverted className="topic" onClick={() => setView(id)}>
-      <Header as="h2" className="topic-header">{title.toUpperCase() + ', ' + id}</Header>
+    <Segment compact inverted className="topic-item" onClick={() => setView(id)}>
+      <Header as="h2" className="topic-item-header">{title.toUpperCase() + ', ' + id}</Header>
     </Segment>
   )
 }

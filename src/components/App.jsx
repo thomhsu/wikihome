@@ -55,17 +55,16 @@ function App() {
         </div>
       )
     } else {
+      let selectedTopic;
+      topics.forEach(topic => {
+        if (topic._id === currentView) {
+          selectedTopic = topic;
+        }
+      })
       return (
-        <div>
-          Under Construction
-        </div>
+        <TopicView topic={selectedTopic} />
       )
     }
-    // } else {
-    //   return (
-    //     <TopicView />
-    //   )
-    // }
   }
 
   return (
