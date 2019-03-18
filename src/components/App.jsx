@@ -31,9 +31,9 @@ function App() {
       .catch((err) => console.log(err));
   }
 
-  const addTopic = (event, title, text) => {
+  const addTopic = (event, title, text, parent) => {
     event.preventDefault();
-    let data = {title, text};
+    let data = {title, text, parent};
 
     fetch ('/topics', {
       method: 'POST',
@@ -57,16 +57,10 @@ function App() {
       })
       return (
         <div>
-          {parentTopics.map(topic => <TopicItem title={topic.title} text={topic.text} id={topic._id} setView={setView.bind(this)} key={topic._id}/>)}
+          {parentTopics.map(topic => <TopicItem topic={topic} setView={setView.bind(this)} key={topic._id}/>)}
         </div>
       )
     } else {
-      let selectedTopic;
-      topics.forEach(topic => {
-        if (topic._id === currentView) {
-          selectedTopic = topic;
-        }
-      });
       let relatedTopics = [];
       topics.forEach(topic => {
         topic.parents.forEach(parent => {
@@ -76,7 +70,7 @@ function App() {
         })
       });
       return (
-        <TopicView topic={selectedTopic} relatedTopics={relatedTopics} />
+        <TopicView topic={currentView} relatedTopics={relatedTopics} />
       )
     }
   }

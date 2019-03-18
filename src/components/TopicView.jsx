@@ -5,7 +5,7 @@ import {
   Header
  } from 'semantic-ui-react';
 
-function TopicView({topic}) {
+function TopicView({topic, relatedTopics}) {
   return (
     <Container >
       <Segment compact inverted className="topic-title">
