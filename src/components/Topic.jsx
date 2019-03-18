@@ -3,10 +3,10 @@ import {
   Segment, Header
  } from 'semantic-ui-react';
 
-function Topic({title, text}) {
+function Topic({title, text, id}) {
   return (
     <Segment compact inverted className="topic">
-      <Header as="h2" className="topic-header">{title}</Header>
+      <Header as="h2" className="topic-header">{title.toUpperCase() + ', ' + id}</Header>
     </Segment>
   )
 }

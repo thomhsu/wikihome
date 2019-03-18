@@ -11,6 +11,7 @@ import BottomBar from './BottomBar.jsx';
 function App() {
 
   const [topics, setTopics] = useState([]);
+  const [currentView, setView] = useState('wiki');
 
   const quotes = [
     'A man travels the world over in search of what he needs and returns home to find it. <em>George A. Moore</em>',
@@ -29,7 +30,7 @@ function App() {
       .catch((err) => console.log(err));
   }
 
-  let addTopic = function(event, title, text) {
+  const addTopic = function(event, title, text) {
     event.preventDefault();
     let data = {title, text};
 
@@ -41,9 +42,19 @@ function App() {
       body: JSON.stringify(data)
     })
       .then(data => console.log(data))
+      .then(() => getTopics())
       .catch(err => console.log(err));
   }
-  addTopic = addTopic.bind(this);
+
+  const renderCurrent = function() {
+    if (currentView === 'wiki') {
+      return (
+        <div>
+          {topics.map(topic => <Topic title={topic.title} text={topic.text} id={topic._id} key={topic._id}/>)}
+        </div>
+      )
+    }
+  }
 
   return (
     <Container fluid>
@@ -51,8 +62,8 @@ function App() {
         <Icon name="home" />
         <Header.Content>WikiHome</Header.Content>
       </Header>
-      {topics.map(topic => <Topic title={topic.title} text={topic.text} />)}
-      <BottomBar addTopic={addTopic} />
+      {renderCurrent()}
+      <BottomBar addTopic={addTopic.bind(this)} />
     </Container>
   );
 }

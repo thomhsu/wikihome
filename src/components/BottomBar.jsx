@@ -50,7 +50,7 @@ function BottomBar({addTopic}) {
         </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => newTopicModalOpened(false)} >Cancel</Button>
-          <Button positive form="newTopicForm" onClick={() => addTopic(event, title, text)} icon="checkmark" labelPosition="right" content="Yes"/>
+          <Button positive form="newTopicForm" onClick={() => {addTopic(event, title, text); newTopicModalOpened(false)}} icon="checkmark" labelPosition="right" content="Yes"/>
         </Modal.Actions>
       </Modal>
     </Menu>

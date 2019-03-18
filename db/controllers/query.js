@@ -1,7 +1,7 @@
 const Topic = require('../models/topic.js');
 
 module.exports.getTopics = async (req, res) => {
-  const data = await Topic.find({});
+  const data = await Topic.find({}).sort('title');
   res.send(data);
 }
 
