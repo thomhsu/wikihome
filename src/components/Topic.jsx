@@ -5,8 +5,8 @@ import {
 
 function Topic({title, text}) {
   return (
-    <Segment raised>
-      <Header as='h2'>{title + ', ' + text}</Header>
+    <Segment compact inverted className="topic">
+      <Header as="h2" className="topic-header">{title}</Header>
     </Segment>
   )
 }
