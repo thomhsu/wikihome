@@ -31,9 +31,10 @@ function App() {
       .catch((err) => console.log(err));
   }
 
-  const addTopic = (event, title, text, parent) => {
+  const addTopic = (event, title, text, parents) => {
     event.preventDefault();
-    let data = {title, text, parent};
+    parents = JSON.stringify({parents});
+    let data = {title, text, parents};
 
     fetch ('/topics', {
       method: 'POST',
