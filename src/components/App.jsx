@@ -119,6 +119,10 @@ function App() {
       <div className="main">
         {renderCurrent()}
       </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       <BottomBar topics={topics} addTopic={addTopic.bind(this)} editTopic={editTopic.bind(this)} deleteTopic={deleteTopic.bind(this)} currentView={currentView} setView={setView.bind(this)} />
     </Container>
   );
