@@ -17,3 +17,15 @@ module.exports.createNewTopic = (req, res) => {
     .then(data => res.send(data))
     .catch(err => console.log(err));
 };
+
+module.exports.editTopic = (req, res) => {
+  const topic = req.body;
+  console.log(req.body)
+  const editedTopic = {
+    title: topic.title,
+    text: topic.text,
+  }
+  Topic.updateOne({_id: topic._id}, editedTopic)
+    .then(data => res.send(data))
+    .catch(err => console.log(err));
+};

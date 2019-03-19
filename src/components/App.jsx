@@ -71,7 +71,7 @@ function App() {
 
   return (
     <Container fluid>
-      <Header as="h1" icon textAlign="center" className="header">
+      <Header as="h1" icon textAlign="center" className="logo">
         <Icon name="home" onClick={() => setView('home')} />
         <Header.Content>WikiHome</Header.Content>
       </Header>
