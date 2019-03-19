@@ -79,7 +79,11 @@ function BottomBar({topics, addTopic, editTopic, deleteTopic, currentView, setVi
 
         <Menu.Item
           name="newTopic"
-          onClick={() => newTopicModalOpened(true)}  
+          onClick={() => {
+            newTopicModalOpened(true);
+            setTitle('');
+            setText('');
+          }}
         >
           <Icon name="plus" />
         </Menu.Item>
