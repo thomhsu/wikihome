@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { 
   Container,
   Icon,
-  Header
+  Header,
+  Divider
  } from 'semantic-ui-react';
 
 import Navigation from './Navigation.jsx';
@@ -43,6 +44,39 @@ function App() {
       .catch(err => console.log(err));
   }
 
+  const editTopic = (event, title, text, topicId) => {
+    event.preventDefault();
+
+    let data = {title, text, _id: topicId};
+
+    fetch ('/topics', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(data => console.log(data))
+      .then(() => getTopics())
+      .then(() => setView(currentView))
+      .catch(err => console.log(err));
+  }
+
+  const deleteTopic = (event, title, text, topicId) => {
+    event.preventDefault();
+
+    fetch ('/topics', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({_id: topicId})
+    })
+      .then(data => console.log(data))
+      .then(() => getTopics())
+      .catch(err => console.log(err));
+  }
+
   const renderCurrent = function() {
     if (currentView === 'home') {
       let mainTopics = [];
@@ -75,9 +109,11 @@ function App() {
         <Icon name="home" onClick={() => setView('home')} />
         <Header.Content>WikiHome</Header.Content>
       </Header>
+      <Divider />
       <Navigation currentView={currentView} topics={topics} setView={setView} />
+      <Divider />
       {renderCurrent()}
-      <BottomBar addTopic={addTopic.bind(this)} currentView={currentView} />
+      <BottomBar addTopic={addTopic.bind(this)} editTopic={editTopic.bind(this)} currentView={currentView} />
     </Container>
   );
 }

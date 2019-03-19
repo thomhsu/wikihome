@@ -14,5 +14,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get('/topics', query.getTopics);
 app.post('/topics', query.createNewTopic);
 app.patch('/topics', query.editTopic);
+app.delete('/topics', query.deleteTopic);
  
 app.listen(port, () => console.log(`Listening on ${port}...`));

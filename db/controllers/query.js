@@ -29,3 +29,12 @@ module.exports.editTopic = (req, res) => {
     .then(data => res.send(data))
     .catch(err => console.log(err));
 };
+
+module.exports.deleteTopic = (req, res) => {
+  const topic = req.body;
+  console.log(req.body)
+
+  Topic.deleteOne({_id: topic._id})
+    .then(data => res.send(data))
+    .catch(err => console.log(err));
+};

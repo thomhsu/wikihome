@@ -9,7 +9,7 @@ import {
 function TopicView({topic, relatedTopics, setView}) {
   return (
     <Container >
-      <Segment compact className="topic-title">
+      <Segment className="topic-title">
         <Header as='h2' className="topic-tile-header">{topic.title.toUpperCase()}</Header>
       </Segment>
       <p>{topic.text}</p>
