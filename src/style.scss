@@ -3,8 +3,28 @@ body {
   font-size: 1.5rem;
 }
 
+.logo {
+  padding-top: 20px;
+}
+
+.nav {
+  height: 4rem;
+}
+
+.divider {
+  margin: 0px 5px !important;
+}
+
 .header {
   font-family: inherit !important;
+}
+
+.main {
+  margin-top: 20px;
+}
+
+.topic-item:hover {
+  cursor: pointer;
 }
 
 .topic-item {
@@ -28,9 +48,5 @@ body {
 }
 
 .breadcrumbs {
-  font-size: 1.2rem !important;
-}
-
-.divider {
-  margin: 20px !important;
+  font-size: 1.4rem !important;
 }

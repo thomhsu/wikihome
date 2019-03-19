@@ -53,7 +53,11 @@ function BottomBar({topics, addTopic, editTopic, deleteTopic, currentView, setVi
       <Menu.Menu position="right">
         <Menu.Item
           name="deleteTopic"
-          onClick={() => deleteTopicModalOpened(true)}  
+          onClick={() => {
+            if (currentView !== 'home') {
+              deleteTopicModalOpened(true);
+            }
+          }}  
           className={currentView === 'home' ? 'disabled' : ''}
         >
           <Icon name="trash" />
@@ -61,7 +65,13 @@ function BottomBar({topics, addTopic, editTopic, deleteTopic, currentView, setVi
 
         <Menu.Item
           name="editTopic"
-          onClick={() => editTopicModalOpened(true)}  
+          onClick={() => {
+            if (currentView !== 'home') {
+              editTopicModalOpened(true);
+              setTitle(currentView.title);
+              setText(currentView.text);
+            }
+          }}
           className={currentView === 'home' ? 'disabled' : ''}
         >
           <Icon name="edit" />
@@ -106,7 +116,7 @@ function BottomBar({topics, addTopic, editTopic, deleteTopic, currentView, setVi
       <Modal size="fullscreen" open={deleteTopicModal} onClose={() => deleteTopicModalOpened(false)}>
         <Modal.Header>Delete {currentView.title}</Modal.Header>
         <Modal.Content>
-          Are you sure??  This is irreversible.
+          Are you sure?  This is irreversible.
         </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => deleteTopicModalOpened(false)} >Cancel</Button>

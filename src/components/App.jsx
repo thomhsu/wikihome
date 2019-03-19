@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { 
+  Grid,
   Container,
   Icon,
   Header,
@@ -105,14 +106,19 @@ function App() {
 
   return (
     <Container fluid>
-      <Header as="h1" icon textAlign="center" className="logo">
-        <Icon name="home" onClick={() => setView('home')} />
-        <Header.Content>WikiHome</Header.Content>
-      </Header>
+      <div className="logo">
+        <Header as="h1" icon textAlign="center" className="logo">
+          <Icon name="home" onClick={() => setView('home')} />
+          <Header.Content>WikiHome</Header.Content>
+        </Header>
+      </div>
+      <div className="nav">
+        <Navigation currentView={currentView} topics={topics} setView={setView} />
+      </div>
       <Divider />
-      <Navigation currentView={currentView} topics={topics} setView={setView} />
-      <Divider />
-      {renderCurrent()}
+      <div className="main">
+        {renderCurrent()}
+      </div>
       <BottomBar topics={topics} addTopic={addTopic.bind(this)} editTopic={editTopic.bind(this)} deleteTopic={deleteTopic.bind(this)} currentView={currentView} setView={setView.bind(this)} />
     </Container>
   );
