@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { 
+  Grid,
   Container,
   Icon,
-  Header
+  Header,
+  Divider
  } from 'semantic-ui-react';
 
+import Navigation from './Navigation.jsx';
 import TopicItem from './TopicItem.jsx';
 import TopicView from './TopicView.jsx';
 import BottomBar from './BottomBar.jsx';
@@ -14,12 +17,6 @@ function App() {
   const [topics, setTopics] = useState([]);
   const [currentView, setView] = useState('home');
 
-  const quotes = [
-    'A man travels the world over in search of what he needs and returns home to find it. <em>George A. Moore</em>',
-    'There is nothing like staying at home for real comfort. <em>Jane Austen</em>',
-    'Home is the nicest word there is. <em>Laura Ingalis Wilder</em>'
-  ];
-
   useEffect(() => {
     getTopics();
   }, []);
@@ -27,18 +24,14 @@ function App() {
   const getTopics = () => {
     fetch('/topics')
       .then((res) => res.json())
-      .then((topicList) => setTopics(topicList.map(topic => {
-        topic.parents = JSON.parse(topic.parents).parentArr;
-        return topic;
-      })))
+      .then((topicList) => setTopics(topicList))
       .catch((err) => console.log(err));
   }
 
-  const addTopic = (event, title, text, parentArr) => {
+  const addTopic = (event, title, text, parentId) => {
     event.preventDefault();
-    console.log(parentArr);
-    let parents = JSON.stringify({parentArr});
-    let data = {title, text, parents};
+
+    let data = {title, text, parent: parentId};
 
     fetch ('/topics', {
       method: 'POST',
@@ -52,23 +45,56 @@ function App() {
       .catch(err => console.log(err));
   }
 
+  const editTopic = (event, title, text, topicId) => {
+    event.preventDefault();
+
+    let data = {title, text, _id: topicId};
+
+    fetch ('/topics', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(data => console.log(data))
+      .then(() => getTopics())
+      .then(() => setView(currentView))
+      .catch(err => console.log(err));
+  }
+
+  const deleteTopic = (event, topic) => {
+    event.preventDefault();
+
+    fetch ('/topics', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({_id: topic._id})
+    })
+      .then(data => console.log(data))
+      .then(() => getTopics())
+      .catch(err => console.log(err));
+  }
+
   const renderCurrent = function() {
     if (currentView === 'home') {
-      let parentTopics = [];
+      let mainTopics = [];
       topics.forEach(topic => {
-        if (!topic.parents.length) {
-          parentTopics.push(topic);
+        if (topic.parent === 'home') {
+          mainTopics.push(topic);
         }
       })
       return (
         <div>
-          {parentTopics.map(topic => <TopicItem topic={topic} setView={setView.bind(this)} key={topic._id}/>)}
+          {mainTopics.map(topic => <TopicItem topic={topic} setView={setView.bind(this)} key={topic._id}/>)}
         </div>
       )
     } else {
       let relatedTopics = [];
       topics.forEach(topic => {
-        if (topic.parents.length && topic.parents[topic.parents.length - 1][0] === currentView._id) {
+        if (topic.parent === currentView._id) {
           relatedTopics.push(topic);
         }
       });
@@ -80,12 +106,20 @@ function App() {
 
   return (
     <Container fluid>
-      <Header as="h1" icon textAlign="center" className="header">
-        <Icon name="home" onClick={() => setView('home')} />
-        <Header.Content>WikiHome</Header.Content>
-      </Header>
-      {renderCurrent()}
-      <BottomBar addTopic={addTopic.bind(this)} currentView={currentView} />
+      <div className="logo">
+        <Header as="h1" icon textAlign="center" className="logo">
+          <Icon name="home" onClick={() => setView('home')} />
+          <Header.Content>WikiHome</Header.Content>
+        </Header>
+      </div>
+      <div className="nav">
+        <Navigation currentView={currentView} topics={topics} setView={setView} />
+      </div>
+      <Divider />
+      <div className="main">
+        {renderCurrent()}
+      </div>
+      <BottomBar topics={topics} addTopic={addTopic.bind(this)} editTopic={editTopic.bind(this)} deleteTopic={deleteTopic.bind(this)} currentView={currentView} setView={setView.bind(this)} />
     </Container>
   );
 }

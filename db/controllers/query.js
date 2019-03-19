@@ -11,9 +11,30 @@ module.exports.createNewTopic = (req, res) => {
   const newTopic = new Topic ({
     title: topic.title,
     text: topic.text,
-    parents: topic.parents
+    parent: topic.parent
   })
   newTopic.save()
+    .then(data => res.send(data))
+    .catch(err => console.log(err));
+};
+
+module.exports.editTopic = (req, res) => {
+  const topic = req.body;
+  console.log(req.body)
+  const editedTopic = {
+    title: topic.title,
+    text: topic.text,
+  }
+  Topic.updateOne({_id: topic._id}, editedTopic)
+    .then(data => res.send(data))
+    .catch(err => console.log(err));
+};
+
+module.exports.deleteTopic = (req, res) => {
+  const topic = req.body;
+  console.log(req.body)
+
+  Topic.deleteOne({_id: topic._id})
     .then(data => res.send(data))
     .catch(err => console.log(err));
 };
