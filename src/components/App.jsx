@@ -5,6 +5,7 @@ import {
   Header
  } from 'semantic-ui-react';
 
+import Navigation from './Navigation.jsx';
 import TopicItem from './TopicItem.jsx';
 import TopicView from './TopicView.jsx';
 import BottomBar from './BottomBar.jsx';
@@ -84,6 +85,7 @@ function App() {
         <Icon name="home" onClick={() => setView('home')} />
         <Header.Content>WikiHome</Header.Content>
       </Header>
+      <Navigation currentView={currentView} setView={setView} />
       {renderCurrent()}
       <BottomBar addTopic={addTopic.bind(this)} currentView={currentView} />
     </Container>
