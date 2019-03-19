@@ -27,13 +27,16 @@ function App() {
   const getTopics = () => {
     fetch('/topics')
       .then((res) => res.json())
-      .then((topicList) => setTopics(topicList))
+      .then((topicList) => setTopics(topicList.map(topic => {
+        topic.parents = JSON.parse(topic.parents.parentArr);
+        return topic;
+      })))
       .catch((err) => console.log(err));
   }
 
-  const addTopic = (event, title, text, parents) => {
+  const addTopic = (event, title, text, parentArr) => {
     event.preventDefault();
-    parents = JSON.stringify({parents});
+    parents = JSON.stringify({parentArr});
     let data = {title, text, parents};
 
     fetch ('/topics', {
