@@ -22,8 +22,6 @@ function BottomBar({addTopic, currentView}) {
     handler[e.target.name](e.target.value);
   }
 
-  let newTopicParents = currentView === 'home' ? [] : currentView.parents.concat([[currentView._id, currentView.title]]);
-
   return (
     <Menu
       className="bottom fixed"
@@ -50,7 +48,7 @@ function BottomBar({addTopic, currentView}) {
         </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => newTopicModalOpened(false)} >Cancel</Button>
-          <Button positive form="newTopicForm" onClick={() => {addTopic(event, title, text, newTopicParents); newTopicModalOpened(false)}} icon="checkmark" labelPosition="right" content="Yes"/>
+          <Button positive form="newTopicForm" onClick={() => {addTopic(event, title, text, currentView._id || 'home'); newTopicModalOpened(false)}} icon="checkmark" labelPosition="right" content="Yes"/>
         </Modal.Actions>
       </Modal>
     </Menu>
