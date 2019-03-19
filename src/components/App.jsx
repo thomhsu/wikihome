@@ -62,7 +62,7 @@ function App() {
       .catch(err => console.log(err));
   }
 
-  const deleteTopic = (event, title, text, topicId) => {
+  const deleteTopic = (event, topicId) => {
     event.preventDefault();
 
     fetch ('/topics', {
@@ -113,7 +113,7 @@ function App() {
       <Navigation currentView={currentView} topics={topics} setView={setView} />
       <Divider />
       {renderCurrent()}
-      <BottomBar addTopic={addTopic.bind(this)} editTopic={editTopic.bind(this)} currentView={currentView} />
+      <BottomBar addTopic={addTopic.bind(this)} editTopic={editTopic.bind(this)} deleteTopic={deleteTopic.bind(this)} currentView={currentView} />
     </Container>
   );
 }
