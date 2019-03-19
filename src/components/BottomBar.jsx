@@ -22,7 +22,7 @@ function BottomBar({addTopic, currentView}) {
     handler[e.target.name](e.target.value);
   }
 
-  let newTopicParents = currentView === 'home' ? [] : currentView.parents.concat([currentView._id, currentView.title]);
+  let newTopicParents = currentView === 'home' ? [] : currentView.parents.concat([[currentView._id, currentView.title]]);
 
   return (
     <Menu
