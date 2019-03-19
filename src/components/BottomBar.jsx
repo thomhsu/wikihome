@@ -4,7 +4,6 @@ import {
   Modal,
   Button,
   Form,
-  Search,
   Icon
  } from 'semantic-ui-react';
 
@@ -43,31 +42,38 @@ function BottomBar({topics, addTopic, editTopic, deleteTopic, currentView, setVi
     <Menu
       className="bottom fixed"
     >
+
       <Menu.Item
-        name="search"
+        name="home"
+        onClick={() => setView('home')}
       >
-        <Search />
+        <Icon name="home" />
       </Menu.Item>
-      <Menu.Item
-        name="deleteTopic"
-        onClick={() => deleteTopicModalOpened(true)}  
-        className={currentView === 'home' ? 'disabled' : ''}
-      >
-        <Icon name="trash" />
-      </Menu.Item>
-      <Menu.Item
-        name="editTopic"
-        onClick={() => editTopicModalOpened(true)}  
-        className={currentView === 'home' ? 'disabled' : ''}
-      >
-        <Icon name="edit" />
-      </Menu.Item>
-      <Menu.Item
-        name="newTopic"
-        onClick={() => newTopicModalOpened(true)}  
-      >
-        <Icon name="plus" />
-      </Menu.Item>
+
+      <Menu.Menu position="right">
+        <Menu.Item
+          name="deleteTopic"
+          onClick={() => deleteTopicModalOpened(true)}  
+          className={currentView === 'home' ? 'disabled' : ''}
+        >
+          <Icon name="trash" />
+        </Menu.Item>
+
+        <Menu.Item
+          name="editTopic"
+          onClick={() => editTopicModalOpened(true)}  
+          className={currentView === 'home' ? 'disabled' : ''}
+        >
+          <Icon name="edit" />
+        </Menu.Item>
+
+        <Menu.Item
+          name="newTopic"
+          onClick={() => newTopicModalOpened(true)}  
+        >
+          <Icon name="plus" />
+        </Menu.Item>
+      </Menu.Menu>
 
       <Modal size="fullscreen" open={newTopic} onClose={() => newTopicModalOpened(false)}>
         <Modal.Header>Add a New Topic</Modal.Header>
