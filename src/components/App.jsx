@@ -28,7 +28,7 @@ function App() {
     fetch('/topics')
       .then((res) => res.json())
       .then((topicList) => setTopics(topicList.map(topic => {
-        topic.parents = JSON.parse(topic.parents.parentArr);
+        topic.parents = JSON.parse(topic.parents).parentArr;
         return topic;
       })))
       .catch((err) => console.log(err));

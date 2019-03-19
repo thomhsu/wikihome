@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/wikihome');
+mongoose.connect('mongodb://localhost/wikihome', { useNewUrlParser: true });
 
 const db = mongoose.connection;
 
