@@ -8,7 +8,7 @@ import {
  } from 'semantic-ui-react';
 
 
-function BottomBar({addTopic, newItemParents}) {
+function BottomBar({addTopic, currentView}) {
 
   const [open, newTopicModalOpened] = useState(false);
   const [title, setTitle] = useState('');
@@ -21,6 +21,8 @@ function BottomBar({addTopic, newItemParents}) {
     };
     handler[e.target.name](e.target.value);
   }
+
+  let newTopicParents = currentView === 'home' ? [] : [...currentView.parents].push([currentView._id, currentView.title]);
 
   return (
     <Menu
@@ -48,7 +50,7 @@ function BottomBar({addTopic, newItemParents}) {
         </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => newTopicModalOpened(false)} >Cancel</Button>
-          <Button positive form="newTopicForm" onClick={() => {addTopic(event, title, text, newItemParents); newTopicModalOpened(false)}} icon="checkmark" labelPosition="right" content="Yes"/>
+          <Button positive form="newTopicForm" onClick={() => {addTopic(event, title, text, newTopicParents); newTopicModalOpened(false)}} icon="checkmark" labelPosition="right" content="Yes"/>
         </Modal.Actions>
       </Modal>
     </Menu>

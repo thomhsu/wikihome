@@ -11,7 +11,7 @@ module.exports.createNewTopic = (req, res) => {
   const newTopic = new Topic ({
     title: topic.title,
     text: topic.text,
-    keywords: topic.keywords,
+    parents: topic.parents
   })
   newTopic.save()
     .then(data => res.send(data))

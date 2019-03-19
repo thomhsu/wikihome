@@ -36,7 +36,8 @@ function App() {
 
   const addTopic = (event, title, text, parentArr) => {
     event.preventDefault();
-    parents = JSON.stringify({parentArr});
+    console.log(parentArr);
+    let parents = JSON.stringify({parentArr});
     let data = {title, text, parents};
 
     fetch ('/topics', {
@@ -86,7 +87,7 @@ function App() {
         <Header.Content>WikiHome</Header.Content>
       </Header>
       {renderCurrent()}
-      <BottomBar addTopic={addTopic.bind(this)} newItemParents={currentView === 'home' ? [] : [...currentView.parents].push([currentView._id, currentView.title])} />
+      <BottomBar addTopic={addTopic.bind(this)} currentView={currentView} />
     </Container>
   );
 }
