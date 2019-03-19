@@ -62,7 +62,7 @@ function App() {
       .catch(err => console.log(err));
   }
 
-  const deleteTopic = (event, topicId) => {
+  const deleteTopic = (event, topic) => {
     event.preventDefault();
 
     fetch ('/topics', {
@@ -70,7 +70,7 @@ function App() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({_id: topicId})
+      body: JSON.stringify({_id: topic._id})
     })
       .then(data => console.log(data))
       .then(() => getTopics())
@@ -113,7 +113,7 @@ function App() {
       <Navigation currentView={currentView} topics={topics} setView={setView} />
       <Divider />
       {renderCurrent()}
-      <BottomBar addTopic={addTopic.bind(this)} editTopic={editTopic.bind(this)} deleteTopic={deleteTopic.bind(this)} currentView={currentView} />
+      <BottomBar topics={topics} addTopic={addTopic.bind(this)} editTopic={editTopic.bind(this)} deleteTopic={deleteTopic.bind(this)} currentView={currentView} setView={setView.bind(this)} />
     </Container>
   );
 }

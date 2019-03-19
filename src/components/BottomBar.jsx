@@ -9,7 +9,7 @@ import {
  } from 'semantic-ui-react';
 
 
-function BottomBar({addTopic, editTopic, deleteTopic, currentView}) {
+function BottomBar({topics, addTopic, editTopic, deleteTopic, currentView, setView}) {
 
   const [newTopic, newTopicModalOpened] = useState(false);
   const [editTopicModal, editTopicModalOpened] = useState(false);
@@ -23,6 +23,20 @@ function BottomBar({addTopic, editTopic, deleteTopic, currentView}) {
       text: setText
     };
     handler[e.target.name](e.target.value);
+  }
+
+  const displayParent = () => {
+    if (currentView.parent === 'home') {
+      setView('home');
+    } else {
+      let parent;
+      for (let i = 0; i < topics.length; i++) {
+        if (topics[i]._id === currentView.parent) {
+          parent = topics[i];
+        }
+      }
+      setView(parent);
+    }
   }
 
   return (
@@ -90,7 +104,7 @@ function BottomBar({addTopic, editTopic, deleteTopic, currentView}) {
         </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => deleteTopicModalOpened(false)} >Cancel</Button>
-          <Button positive onClick={() => {deleteTopic(currentView._id); editTopicModalOpened(false); currentView.title = title; currentView.text = text}} icon="checkmark" labelPosition="right" content="Yes"/>
+          <Button positive onClick={() => {deleteTopic(event, currentView); deleteTopicModalOpened(false); displayParent()}} icon="checkmark" labelPosition="right" content="Yes"/>
         </Modal.Actions>
       </Modal>
 
