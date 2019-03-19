@@ -3,10 +3,7 @@ const mongoose = require('mongoose');
 const topicSchema = new mongoose.Schema({
   title: String,
   text: String,
-  parents: {
-    type: Array,
-    default: []
-  }
+  parents: String
 })
 
 const Topic = mongoose.model('Topic', topicSchema);

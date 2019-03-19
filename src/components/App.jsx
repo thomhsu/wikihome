@@ -82,7 +82,7 @@ function App() {
         <Header.Content>WikiHome</Header.Content>
       </Header>
       {renderCurrent()}
-      <BottomBar addTopic={addTopic.bind(this)} />
+      <BottomBar addTopic={addTopic.bind(this)} newItemParents={currentView === 'home' ? [] : [...currentView.parents].push([currentView._id, currentView.title])} />
     </Container>
   );
 }

@@ -8,13 +8,11 @@ import {
  } from 'semantic-ui-react';
 
 
-function BottomBar({addTopic}) {
+function BottomBar({addTopic, newItemParents}) {
 
-  const [topics, setTopics] = useState([]);
   const [open, newTopicModalOpened] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [keywords, setKeywords] = useState([]);
 
   const handleChange = (e) => {
     const handler = {
@@ -50,7 +48,7 @@ function BottomBar({addTopic}) {
         </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => newTopicModalOpened(false)} >Cancel</Button>
-          <Button positive form="newTopicForm" onClick={() => {addTopic(event, title, text, parent); newTopicModalOpened(false)}} icon="checkmark" labelPosition="right" content="Yes"/>
+          <Button positive form="newTopicForm" onClick={() => {addTopic(event, title, text, newItemParents); newTopicModalOpened(false)}} icon="checkmark" labelPosition="right" content="Yes"/>
         </Modal.Actions>
       </Modal>
     </Menu>
